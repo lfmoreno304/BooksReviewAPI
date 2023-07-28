@@ -61,5 +61,12 @@ namespace Data
             var result = await db.ExecuteAsync(sql, new { id = user.User_id });
             return result > 0;
         }
+
+        public async Task<Users> GetUserByEmailAndPassword(string Email, string Password)
+        {
+            var db = dbConnection();
+            var sql = @"SELECT user_id,email,password,img FROM users WHERE email = @email AND password = @password";
+            return await db.QueryFirstOrDefaultAsync<Users>(sql, new { email = Email,password = Password});
+        }
     }
 }

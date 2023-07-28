@@ -11,9 +11,9 @@ namespace DB
     {
         [Key]
         public int Review_id { get; set; }
-        public string Decription { get; set; }
+        public string Description { get; set; }
         public int Rating { get; set; }
-        public int Bookid { get; set; }
-        public int Userid { get; set; }
+        public int Book_id { get; set; }
+        public int User_id { get; set; }
     }
 }
