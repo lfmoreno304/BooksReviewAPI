@@ -20,13 +20,13 @@ jobs:
       
       
       - name: Restore
-        run: dotnet restore ./BooksReviewApi.sln
+        run: dotnet restore ./BooksReviewAPI.sln
         
       - name: Build
-        run: dotnet build ./BooksReviewApi.sln --configuration Realese --no-restore
+        run: dotnet build ./BooksReviewAPI.sln --configuration Realese --no-restore
         
       - name: Publish
-        run: dotnet publish ./BooksReviewApi.sln  --configuration Realese --no-build --output '${{ secrets.AZURE_WEBAPP_PACKAGE_PATH }}'
+        run: dotnet publish ./BooksReviewAPI.sln  --configuration Realese --no-build --output '${{ secrets.AZURE_WEBAPP_PACKAGE_PATH }}'
         
       - name: Deployment
         uses: azure/webapps-deploy@v2
