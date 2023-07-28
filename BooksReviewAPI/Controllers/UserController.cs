@@ -45,7 +45,8 @@ namespace BooksReviewAPI.Controllers
                 };
             }
 
-            var jwt = _configuration.GetSection("Jwt").Get<Jwt>();
+            Jwt jwt = new Jwt(_configuration["Key"], _configuration["Issuer"], _configuration["Audience"], _configuration["Subject"]);
+          
             var claims = new[] {
                 new Claim(JwtRegisteredClaimNames.Sub,jwt.Subject),
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
