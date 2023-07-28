@@ -56,7 +56,7 @@ namespace BooksReviewAPI.Controllers
         [HttpDelete]
         public async Task<IActionResult> DeleteBook(int id) {
 
-            await _bookRepository.DeleteBook(new Books { Bookid = id });
+            await _bookRepository.DeleteBook(new Books { Book_id = id });
 
             return NoContent();
         

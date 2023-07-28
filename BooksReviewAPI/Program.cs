@@ -14,6 +14,7 @@ var connectioKey = builder.Configuration["ConnectionStrings"];
 var mySQLConfiguration = new MySQLConfiguration(connectioKey);
 builder.Services.AddSingleton(mySQLConfiguration);
 builder.Services.AddScoped<IBookRepository, BookRepository>();
+builder.Services.AddScoped<IUserRepository, UserRepository>();
 
 var app = builder.Build();
 

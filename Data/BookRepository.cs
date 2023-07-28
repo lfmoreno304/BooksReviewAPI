@@ -25,7 +25,7 @@ namespace Data
         {
             var db = dbConnection();
             var sql = @"DELETE FROM books WHERE book_id = @id";
-            var result = await db.ExecuteAsync(sql, new { id = book.Bookid });
+            var result = await db.ExecuteAsync(sql, new { id = book.Book_id });
             return result > 0;
         }
 
@@ -37,12 +37,12 @@ namespace Data
             return await db.QueryAsync<Books>(sql, new { });
         }
 
-        public async Task<Books> GetDetails(int id)
+        public async Task<Books> GetDetails(int Id)
         {
             var db = dbConnection();
             var sql = @"SELECT *  FROM books WHERE book_id = @id";
 
-            return await db.QueryFirstOrDefaultAsync<Books>(sql, new {book_id = id });
+            return await db.QueryFirstOrDefaultAsync<Books>(sql, new {id = Id });
         }
 
         public async Task<bool> InsertBook(Books book)
@@ -67,7 +67,7 @@ namespace Data
                         author=@author WHERE book_id = @id ";
 
             var result = await db.ExecuteAsync(sql, new
-            { book.Title, book.Summary, book.Category, book.Img, book.Author, book.Bookid });
+            { book.Title, book.Summary, book.Category, book.Img, book.Author, book.Book_id });
 
             return result > 0;
         }
