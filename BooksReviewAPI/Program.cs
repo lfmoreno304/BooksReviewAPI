@@ -9,9 +9,12 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-var mySQLConfiguration = new MySQLConfiguration(builder.Configuration.GetConnectionString("Default"));
+var connectioKey = builder.Configuration["ConnectionStrings:Default"];
+
+var mySQLConfiguration = new MySQLConfiguration(connectioKey);
 builder.Services.AddSingleton(mySQLConfiguration);
 builder.Services.AddScoped<IBookRepository, BookRepository>();
+
 var app = builder.Build();
 
     // Configure the HTTP request pipeline.
