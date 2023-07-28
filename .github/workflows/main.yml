@@ -5,6 +5,9 @@ on:
   push:
     branches:
     - main
+env:
+  AZURE_WEBAPP_NAME: bookreviewapi1
+  AZURE_WEBAPP_PACKAGE_PATH: "./publish"
   
 jobs:
   publish:
@@ -26,13 +29,13 @@ jobs:
         run: dotnet build ./BooksReviewAPI.sln --configuration Release --no-restore
         
       - name: Publish
-        run: dotnet publish ./BooksReviewAPI.sln  --configuration Release --no-build --output '${{ secrets.AZURE_WEBAPP_PACKAGE_PATH }}'
+        run: dotnet publish ./BooksReviewAPI.sln  --configuration Release --no-build --output '${{ env.AZURE_WEBAPP_PACKAGE_PATH }}'
         
       - name: Deployment
         uses: azure/webapps-deploy@v2
         with: 
-          app-name: ${{ secrets.AZURE_WEBAPP_NAME }}
+          app-name: ${{ env.AZURE_WEBAPP_NAME }}
           publish-profile: ${{ secrets.AZURE_PUBLISH_PROFILE }}
-          package: "${{ secrets.AZURE_WEBAPP_PACKAGE_PATH }}"
+          package: "${{ env.AZURE_WEBAPP_PACKAGE_PATH }}"
           
         
