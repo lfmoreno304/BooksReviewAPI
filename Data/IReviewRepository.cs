@@ -1,4 +1,5 @@
 ﻿using DB;
+using Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +12,7 @@ namespace Data
     {
         Task<IEnumerable<Review>> GetReviews();
         Task<Review> GetDetails(int id);
-        Task<IEnumerable<Review>> GetBooksReviews(int id);
+        Task<IEnumerable<ReviewDetail>> GetBooksReviews(int id);
         Task<IEnumerable<Review>> GetUsersReviews(int id);
         Task<bool> InsertReview(Review review);
         Task<bool> UpdateReview(Review review);

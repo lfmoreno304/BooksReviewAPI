@@ -1,5 +1,6 @@
 ﻿using Dapper;
 using DB;
+using Model;
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
@@ -34,7 +35,7 @@ namespace Data
         public async Task<Review> GetDetails(int Id)
         {
             var db = dbConnection();
-            var sql = @"SELECT *  FROM reviews WHERE review_id = @id";
+            var sql = @"SELECT * FROM reviews WHERE review_id = @id";
 
             return await db.QueryFirstOrDefaultAsync<Review>(sql, new { id = Id });
         }
@@ -73,12 +74,14 @@ namespace Data
             return result > 0;
         }
 
-        public  async Task<IEnumerable<Review>> GetBooksReviews(int Id)
+        public  async Task<IEnumerable<ReviewDetail>> GetBooksReviews(int Id)
         {
             var db = dbConnection();
-            var sql = @"SELECT *  FROM reviews WHERE book_id = @id";
+            var sql = @"SELECT r.review_id, r.description, r.rating, u.email AS user_email, r.book_id 
+                        FROM reviews r
+                        JOIN users u ON r.user_id = u.user_id WHERE r.book_id = @id";
 
-            return await db.QueryAsync<Review>(sql, new { id = Id });
+            return await db.QueryAsync<ReviewDetail>(sql, new { id = Id });
         }
 
         public async Task<IEnumerable<Review>> GetUsersReviews(int Id)
