@@ -58,14 +58,21 @@ builder.Services.AddScoped<IBookRepository, BookRepository>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IReviewRepository, ReviewRepository>();
 builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddCors(options => {
+    options.AddPolicy("Newpolicy", app => {
+        app.AllowAnyOrigin()
+        .AllowAnyHeader()
+        .AllowAnyMethod();
+    });
+});
 
 var app = builder.Build();
 
    
         app.UseSwagger();
         app.UseSwaggerUI();
-    
 
+app.UseCors("Newpolicy");
 app.UseHttpsRedirection();
 
 app.UseAuthentication();
